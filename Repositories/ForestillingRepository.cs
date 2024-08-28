@@ -33,7 +33,7 @@ public class ForestillingRepository
         {
             Cinema = "CinemaxX",
             Town = "Odense",
-            CinemaHall = new Biografsal { Id = "1", Seats = 10 },
+            CinemaHall = new Biografsal { Id = "1", Seats = 350 },
             Day = DayOfWeek.Thursday,
             StartTime = new DateTime(2021, 10, 15, 14, 0, 0),
             EndTime = new DateTime(2021, 10, 15, 16, 0, 0),

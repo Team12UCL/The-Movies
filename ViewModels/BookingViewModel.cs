@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Windows;
 using System.Windows.Input;
 using The_Movies.Commands;
 using The_Movies.Models;
@@ -21,24 +22,27 @@ public class BookingViewModel : INotifyPropertyChanged
     public Forestilling SelectedForestilling
     {
         get { return _selectedForestilling; }
-        set 
-        { 
+        set
+        {
             _selectedForestilling = value;
             OnPropertyChanged(nameof(SelectedForestilling));
-            Debug.WriteLine(SelectedForestilling.CinemaHall.Seats);
-            //SelectedForestilling.CinemaHall.Seats
+            // Update the number of seats whenever SelectedForestilling changes
+            NumberOfSeats = _selectedForestilling.CinemaHall.Seats;
+            Debug.WriteLine($"SelectedForestilling remaining seats: {_numberOfSeats}");
         }
     }
 
     public int NumberOfSeats
     {
-        get { return SelectedForestilling.CinemaHall.Seats; }
+        get { return _numberOfSeats; }
         set
         {
-            _numberOfSeats = SelectedForestilling.CinemaHall.Seats;
-            //OnPropertyChanged(nameof(_numberOfSeats));
-            //OnPropertyChanged(nameof(SelectedForestilling));
-            Debug.WriteLine(SelectedForestilling.CinemaHall.Seats);
+            if (_numberOfSeats != value)
+            {
+                _numberOfSeats = value;
+                OnPropertyChanged(nameof(NumberOfSeats));
+                Debug.WriteLine($"Updated NumberOfSeats: {_numberOfSeats}");
+            }
         }
     }
 
@@ -84,6 +88,16 @@ public class BookingViewModel : INotifyPropertyChanged
             NumberOfTickets = BookingToAdd.NumberOfTickets,
             BookedForestilling = SelectedForestilling
         };
+
+        if (BookingToAdd.NumberOfTickets > NumberOfSeats)
+        {
+            MessageBox.Show("Not enough seats available for booking");
+            return;
+        }
+        else
+        {
+            NumberOfSeats -= BookingToAdd.NumberOfTickets;
+        }
 
         _bookingRepository.AddBooking(newBooking);
         Bookinger.Add(newBooking);

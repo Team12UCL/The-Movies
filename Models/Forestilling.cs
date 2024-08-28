@@ -17,6 +17,7 @@ namespace The_Movies.Models
         public Film Movie { get; set; }
 
         // Opsummering af forestillingen
-        public string Summary => $"{Movie?.Title} - {Cinema}, sal {CinemaHall}, {Day} {StartTime:HH:mm} til {EndTime:HH:mm}";
+        public string Summary => $"{Movie.Title} - {Cinema} ({Town}), Sal {CinemaHall.Id}, Tid: {Day} {StartTime:HH:mm} til {EndTime:HH:mm}";
+
     }
 }

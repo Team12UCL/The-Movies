@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:The_Movies"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800">
 
      <!--tabcontrol er til tilføjelse af faner-->
     <TabControl>
@@ -91,7 +91,7 @@
             <!--Planlagte visninger-->
                 <StackPanel Grid.Row="0" Grid.Column="0">
                 <TextBlock Text="Planlagte Filmvisninger" FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
-                <ListBox Name="oversigtListBox" ItemsSource="{Binding Forestillinger, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedForestilling}" DisplayMemberPath="Summary" Background="LightGray" Margin="0,0,0,0"/>
+                <ListBox Name="oversigtListBox" ItemsSource="{Binding Forestillinger, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedForestilling}" DisplayMemberPath="Summary" Background="LightGray" Height="200" Margin="10"/>
                 </StackPanel>
             <!--Opret booking-->
                 <StackPanel Grid.Row="0" Grid.Column="1">
@@ -105,7 +105,8 @@
 
                     <TextBlock Text="Antal Billetter:"/>
                     <TextBox Name="tbAntalBilletter" Text="{Binding BookingToAdd.NumberOfTickets}" Margin="0,0,0,10" Width="280" HorizontalAlignment="Left"/>
-
+                    <TextBlock Text="Antal sæder tilbage:"/>
+                    <TextBlock Text="{Binding NumberOfSeats, UpdateSourceTrigger=PropertyChanged}" />
                     <Button Content="Opret Booking" Width="100" Command="{Binding AddCommand}" HorizontalAlignment="Left" Margin="0,20,0,0"/>
                 </StackPanel>
                 
