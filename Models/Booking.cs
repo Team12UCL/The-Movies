@@ -11,7 +11,7 @@ namespace The_Movies.Models
         public string CustomerEmail { get; set; }
         public string CustomerPhone {  get; set; }
         public int NumberOfTickets { get; set; }
-        public DateTime BookingDate { get; set; }
+        public string Summary => $"{CustomerEmail} ({NumberOfTickets})";
 
     }
 }

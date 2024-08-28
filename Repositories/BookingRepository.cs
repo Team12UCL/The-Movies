@@ -32,7 +32,6 @@ namespace The_Movies.Repositories
                 CustomerEmail = "test@example.com",
                 CustomerPhone = "123456789",
                 NumberOfTickets = 2,
-                BookingDate = DateTime.Now
             });
         }
 
