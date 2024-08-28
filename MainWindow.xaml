@@ -1,0 +1,111 @@
+﻿<Window x:Class="The_Movies.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:The_Movies"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+     <!--tabcontrol er til tilføjelse af faner-->
+    <TabControl>
+        <!-- Fane 1: Film Oprettelse -->
+        <TabItem x:Name="MoviesTab" Header="Film Oprettelse">
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- "Film Oprettelse" Venstre side (film-formular)  -->
+            <StackPanel Grid.Column="0" Margin="0,0,20,0">
+                <TextBlock Text="Tilføj Ny Film" FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
+
+                <TextBlock Text="Titel:" />
+                <TextBox Name="tbTitel" Text="{Binding MovieToAdd.Title}" Margin="0,0,0,10" Width="280" HorizontalAlignment="Left" />
+
+                <TextBlock Text="Varighed (minutter):"/>
+                <TextBox Name="tbVarighed" Text="{Binding MovieToAdd.Duration}" Margin="0,0,0,10" Width="280" HorizontalAlignment="Left"/>
+
+                <TextBlock Text="Genre:"/>
+                <TextBox Name="tbGenre" Text="{Binding MovieToAdd.Genre}" Margin="0,0,0,10" Width="280" HorizontalAlignment="Left"/>
+
+                <TextBlock Text="Instruktør:"/>  
+                <TextBox Name="tbInstruktør" Text="{Binding MovieToAdd.Director}" Margin="0,0,0,10" Width="280" HorizontalAlignment="Left"/>
+                
+                <TextBlock Text="Premiere Dato:"/>
+                <DatePicker Height="25" SelectedDate="{Binding MovieToAdd.PremiereDate}" Margin="0,0,0,10" Name="dpPremiereDato" HorizontalAlignment="Left" Width="115" />
+
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Tilføj Film" Width="100" HorizontalAlignment="Left" Command="{Binding AddCommand}"/>
+                    <Button Content="Ryd Felter" Width="100" HorizontalAlignment="Left" Command="{Binding ClearCommand}"/>
+                    <Button Content="Fjern Film" Width="100" HorizontalAlignment="Left" Command="{Binding RemoveCommand}"/>
+                </StackPanel>
+
+                </StackPanel>
+
+            <!-- "Film Oprettelse" Højre side (Liste af film) -->
+                <ListBox Name="filmListBox" ItemsSource="{Binding Movies, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Summary" SelectedItem="{Binding SelectedMovie}" Grid.Column="1" Background="LightGray" Margin="0,0,0,0"/>
+        </Grid>
+    </TabItem>
+
+    <!-- Fane 2: Planlægning -->
+        <TabItem x:Name="PlanningTab" Header="Planlægning" Margin="-2,-2,-2,2">
+        <Grid Margin="20">
+            <StackPanel>
+                <TextBlock Text="Planlæg en Filmvisning" FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
+
+                <!-- Vælg Biograf -->
+                <TextBlock Text="Vælg Biograf:"/>
+                <ComboBox Name="cbBiograf" ItemsSource="{Binding Cinemas, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCinema}" DisplayMemberPath="Summary" Width="280" Margin="0,0,0,10" />
+
+                    <!-- Vælg Sal -->
+                <TextBlock Text="Vælg Sal:"/>
+                <ComboBox Name="cbSal" ItemsSource="{Binding SelectedCinema.CinemaHalls, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCinemaHall}" DisplayMemberPath="Id" Width="280" Margin="0,0,0,10" />
+
+                    <!-- Vælg Spilletid -->
+                <TextBlock Text="Vælg Spilletid:"/>
+                    <ComboBox Name="cbSpilletid" ItemsSource="{Binding SelectedCinemaHall.PlayTimes, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedPlayTime}" DisplayMemberPath="FormattedTime" Width="280" Margin="0,0,0,10" />
+
+                    <!-- Vælg Film -->
+                <TextBlock Text="Vælg Film:"/>
+                    <ComboBox Name="cbFilm" Width="280" Margin="0,0,0,10" ItemsSource="{Binding Movies, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedMovie}" DisplayMemberPath="Title" />
+
+                    <!-- Planlægning -->
+                    <Button Content="Planlæg" Command="{Binding AddForestillingCommand}" Width="100"/>
+
+                </StackPanel>
+        </Grid>
+    </TabItem>
+    <!-- Fane 3: Oversigt -->
+    <TabItem x:Name="BookingTab" Header="Booking">
+        <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+            
+                <StackPanel>
+                <TextBlock Text="Planlagte Filmvisninger" FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
+                <ListBox Name="oversigtListBox" ItemsSource="{Binding Forestillinger, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedForestilling}" DisplayMemberPath="Summary" Background="LightGray" Margin="0,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Opret Ny Booking" FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
+
+                    <TextBlock Text="Email:"/>
+                    <TextBox Name="tbEmail" Text="{Binding NewBooking.CustomerEmail}" Margin="0,0,0,10" Width="280" HorizontalAlignment="Left" />
+
+                    <TextBlock Text="Telefonnummer"/>
+                    <TextBox Name="tbTelefonnummer" Text="{Binding NewBooking.CustomerPhone}" Margin="0,0,0,10" Width="280" HorizontalAlignment="Left" />
+
+                    <TextBlock Text="Antal Billetter:"/>
+                    <TextBox Name="tbAntalBilletter" Text="{Binding NewBooking.NumberOfTickets}" Margin="0,0,0,10" Width="280" HorizontalAlignment="Left"/>
+
+                    <Button Content="Opret Booking" Width="100" Command="{Binding AddBookingCommand}" HorizontalAlignment="Left" Margin="0,20,0,0"/>
+                </StackPanel>
+
+            </Grid>
+    </TabItem>
+</TabControl>
+</Window>
