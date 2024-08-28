@@ -9,7 +9,6 @@ namespace The_Movies.Repositories
         private static BookingRepository _instance;  // Singleton instance
         private List<Booking> _bookings;  // Backing field for the list of bookings
 
-        // kommentar til git
         // Public property to access the singleton instance
         public static BookingRepository Instance
         {
@@ -17,7 +16,7 @@ namespace The_Movies.Repositories
             {
                 if (_instance == null)
                 {
-                    _instance = new BookingRepository();  // Lazy initialization
+                    _instance = new BookingRepository();
                 }
                 return _instance;
             }

@@ -15,6 +15,5 @@ namespace The_Movies.Models
         // Hver biograf har en liste med biografsale
         public List<Biografsal> CinemaHalls { get; set; }
         public string Summary => $"{CinemaName} ({Town})";
-        //Test
     }
 }

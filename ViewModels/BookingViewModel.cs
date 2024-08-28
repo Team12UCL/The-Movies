@@ -14,6 +14,8 @@ public class BookingViewModel : INotifyPropertyChanged
     private ObservableCollection<Forestilling> _forestillinger { get; set; }
     public ObservableCollection<Booking> Bookinger { get; set; }
     public Forestilling SelectedForestilling { get; set; }
+    public Booking BookingToAdd { get; set; }
+    public ICommand AddCommand { get; }
 
     public ObservableCollection<Forestilling> Forestillinger
     {
@@ -32,7 +34,25 @@ public class BookingViewModel : INotifyPropertyChanged
         _bookingRepository = BookingRepository.Instance;
         Forestillinger = _forestillingRepository.GetAllForestillinger();
         Bookinger = new ObservableCollection<Booking>(_bookingRepository.GetAllBookings());
+        BookingToAdd = new Booking();
+        AddCommand = new RelayCommand(x => AddBooking(), x => CanAddBooking());
+    }
 
+    private bool CanAddBooking()
+    {
+        if (BookingToAdd.CustomerEmail != null &&
+            BookingToAdd.CustomerPhone != null &&
+            BookingToAdd.NumberOfTickets != 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private void AddBooking()
+    {
+        _bookingRepository.AddBooking(BookingToAdd);
+        Bookinger.Add(BookingToAdd);
     }
 
     protected void OnPropertyChanged(string propertyName)
