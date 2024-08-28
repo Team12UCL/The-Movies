@@ -40,8 +40,8 @@ public class BookingViewModel : INotifyPropertyChanged
 
     private bool CanAddBooking()
     {
-        if (BookingToAdd.CustomerEmail != null &&
-            BookingToAdd.CustomerPhone != null &&
+        if ((BookingToAdd.CustomerEmail != null ||
+            BookingToAdd.CustomerPhone != null) &&
             BookingToAdd.NumberOfTickets != 0)
         {
             return true;
@@ -51,8 +51,16 @@ public class BookingViewModel : INotifyPropertyChanged
 
     private void AddBooking()
     {
-        _bookingRepository.AddBooking(BookingToAdd);
-        Bookinger.Add(BookingToAdd);
+        Booking newBooking = new Booking
+        {
+            CustomerEmail = BookingToAdd.CustomerEmail,
+            CustomerPhone = BookingToAdd.CustomerPhone,
+            NumberOfTickets = BookingToAdd.NumberOfTickets,
+            BookedForestilling = SelectedForestilling
+        };
+
+        _bookingRepository.AddBooking(newBooking);
+        Bookinger.Add(newBooking);
     }
 
     protected void OnPropertyChanged(string propertyName)
