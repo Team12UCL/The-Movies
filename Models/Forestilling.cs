@@ -10,7 +10,7 @@ namespace The_Movies.Models
     {
         public string Cinema { get; set; }
         public string Town { get; set; }
-        public string CinemaHall { get; set; }
+        public Biografsal CinemaHall { get; set; }
         public DayOfWeek Day { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }

@@ -13,9 +13,34 @@ public class BookingViewModel : INotifyPropertyChanged
     private BookingRepository _bookingRepository { get; set; }
     private ObservableCollection<Forestilling> _forestillinger { get; set; }
     public ObservableCollection<Booking> Bookinger { get; set; }
-    public Forestilling SelectedForestilling { get; set; }
+    public Forestilling _selectedForestilling { get; set; }
     public Booking BookingToAdd { get; set; }
     public ICommand AddCommand { get; }
+    private int _numberOfSeats;
+
+    public Forestilling SelectedForestilling
+    {
+        get { return _selectedForestilling; }
+        set 
+        { 
+            _selectedForestilling = value;
+            OnPropertyChanged(nameof(SelectedForestilling));
+            Debug.WriteLine(SelectedForestilling.CinemaHall.Seats);
+            //SelectedForestilling.CinemaHall.Seats
+        }
+    }
+
+    public int NumberOfSeats
+    {
+        get { return SelectedForestilling.CinemaHall.Seats; }
+        set
+        {
+            _numberOfSeats = SelectedForestilling.CinemaHall.Seats;
+            //OnPropertyChanged(nameof(_numberOfSeats));
+            //OnPropertyChanged(nameof(SelectedForestilling));
+            Debug.WriteLine(SelectedForestilling.CinemaHall.Seats);
+        }
+    }
 
     public ObservableCollection<Forestilling> Forestillinger
     {
@@ -42,7 +67,8 @@ public class BookingViewModel : INotifyPropertyChanged
     {
         if ((BookingToAdd.CustomerEmail != null ||
             BookingToAdd.CustomerPhone != null) &&
-            BookingToAdd.NumberOfTickets != 0)
+            BookingToAdd.NumberOfTickets != 0 &&
+            SelectedForestilling != null)
         {
             return true;
         }

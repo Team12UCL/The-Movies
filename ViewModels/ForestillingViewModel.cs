@@ -115,7 +115,7 @@ namespace The_Movies.ViewModels
             {
                 Cinema = SelectedCinema.CinemaName,
                 Town = SelectedCinema.Town,
-                CinemaHall = SelectedCinemaHall.Id,
+                CinemaHall = SelectedCinemaHall,
                 Day = SelectedPlayTime.Day,
                 StartTime = SelectedPlayTime.StartTime,
                 EndTime = calculatedForestillingEndTime,

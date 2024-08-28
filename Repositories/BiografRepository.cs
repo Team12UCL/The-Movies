@@ -27,12 +27,14 @@ namespace The_Movies.Repositories
                         new Biografsal
                         {
                             Id = "1",
-                            PlayTimes = new List<Spilletid>(PopulatePlayTimes())
+                            PlayTimes = new List<Spilletid>(PopulatePlayTimes()),
+                            Seats = 300
                         },
                         new Biografsal
                         {
                             Id = "2",
-                            PlayTimes = new List<Spilletid>(PopulatePlayTimes())
+                            PlayTimes = new List<Spilletid>(PopulatePlayTimes()),
+                            Seats = 200
                         }
                     }
                 },
@@ -48,17 +50,20 @@ namespace The_Movies.Repositories
                         new Biografsal
                         {
                             Id = "1",
-                            PlayTimes = new List<Spilletid>(PopulatePlayTimes())
+                            PlayTimes = new List<Spilletid>(PopulatePlayTimes()),
+                            Seats = 350
                         },
                         new Biografsal
                         {
                             Id = "2",
-                            PlayTimes = new List<Spilletid>(PopulatePlayTimes())
+                            PlayTimes = new List<Spilletid>(PopulatePlayTimes()),
+                            Seats = 250
                         },
                         new Biografsal
                         {
                             Id = "3",
-                            PlayTimes = new List<Spilletid>(PopulatePlayTimes())
+                            PlayTimes = new List<Spilletid>(PopulatePlayTimes()),
+                            Seats = 175
                         }
                     }
                 },
@@ -74,12 +79,14 @@ namespace The_Movies.Repositories
                         new Biografsal
                         {
                             Id = "1",
-                            PlayTimes = new List<Spilletid>(PopulatePlayTimes())
+                            PlayTimes = new List<Spilletid>(PopulatePlayTimes()),
+                            Seats = 300
                         },
                         new Biografsal
                         {
                             Id = "2",
-                            PlayTimes = new List<Spilletid>(PopulatePlayTimes())
+                            PlayTimes = new List<Spilletid>(PopulatePlayTimes()),
+                            Seats = 200
                         }
                     }
                 }

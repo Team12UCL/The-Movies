@@ -12,11 +12,12 @@ namespace The_Movies.Models
         public string CustomerPhone {  get; set; }
         public int NumberOfTickets { get; set; }
         public Forestilling BookedForestilling { get; set;}
-        public string Summary => $"{CustomerEmail} ({NumberOfTickets} {BookedForestilling.Cinema})";
+        public string Summary => $"{CustomerEmail} ({NumberOfTickets} {BookedForestilling.Cinema} {BookedForestilling.Movie.Summary})";
 
         public Booking()
         {
             BookedForestilling = new Forestilling();
+            BookedForestilling.Movie = new Film();
         }
 
     }
