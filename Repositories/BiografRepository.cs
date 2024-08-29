@@ -13,7 +13,7 @@ namespace The_Movies.Repositories
 
         public BiografRepository()
         {
-            // testdata (3 biografer med hver deres CinemaHalls og PlayTimes)
+            // testdata: 3 biografer med hver deres Biografsale og Spilletider
             Biografer = new List<Biograf>
             {
                 new Biograf

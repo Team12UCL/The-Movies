@@ -16,9 +16,9 @@ public class ForestillingRepository
 
     private ForestillingRepository()
     {
-        _forestillinger = new ObservableCollection<Forestilling>(); // Initialize the list
+        _forestillinger = new ObservableCollection<Forestilling>();
 
-        // Create an instance of Film
+        // testdata: en film
         Film film = new Film
         {
             Title = "Inception",
@@ -28,7 +28,7 @@ public class ForestillingRepository
             PremiereDate = new DateTime(2010, 7, 16)
         };
 
-        // Create an instance of Forestilling and add it to the list
+        // testdata: en forestilling
         _forestillinger.Add(new Forestilling
         {
             Cinema = "CinemaxX",
@@ -37,10 +37,11 @@ public class ForestillingRepository
             Day = DayOfWeek.Thursday,
             StartTime = new DateTime(2021, 10, 15, 14, 0, 0),
             EndTime = new DateTime(2021, 10, 15, 16, 0, 0),
-            Movie = film  // Assign the Film instance to the Movie property
+            Movie = film 
         });
     }
 
+    // For at sikre at der kun er ét instans af ForestillingRepository
     public static ForestillingRepository Instance
     {
         get
@@ -56,6 +57,7 @@ public class ForestillingRepository
         }
     }
 
+    // tilføj en forestilling
     public void AddForestilling(Forestilling forestilling)
     {
         if (forestilling != null)
@@ -69,14 +71,17 @@ public class ForestillingRepository
         }
     }
 
+    // hent alle forestillinger
     public ObservableCollection<Forestilling> GetAllForestillinger()
     {
         Debug.WriteLine("Retrieving all forestillinger from repository");
         return _forestillinger;
     }
 
+    // tjek om to forestillinger overlapper i tid
     public bool AreForestillingerOverlapping(Forestilling forestilling, DateTime startTime, DateTime endTime)
     {
+        // er der nogen forestillinger i listen, der har samme biograf, by, biografsal og dag --- og overlapper i tid?
         return _forestillinger.Any(f =>
             f.Cinema == forestilling.Cinema &&
             f.Town == forestilling.Town &&

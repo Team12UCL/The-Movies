@@ -62,7 +62,7 @@ namespace The_Movies.Repositories
             return _movies;
         }
 
-        // Tjek om en film allerede er tilføjet
+        // Tjek om en film allerede er tilføjet ud fra titel
         public bool IsMovieAlreadyAdded(string title)
         {
             return _movies.Any(m => m.Title == title);
@@ -71,7 +71,7 @@ namespace The_Movies.Repositories
         // Gem film til en CSV-fil
         public void SaveMoviesToCSV(ObservableCollection<Film> _movies)
         {
-            //SaveMoviesAsync();
+            SaveMoviesAsync();
 
             using (StreamWriter sw = new StreamWriter(filePath))
             {
@@ -86,18 +86,18 @@ namespace The_Movies.Repositories
             }
         }
 
-        //public async void SaveMoviesAsync()
-        //{
-        //    try
-        //    {
-        //        // Asynkron gemme film til CSV for at undgå blockering af UI
-        //        await Task.Run(() => _movies);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Fejl opstod under tilføjelse af film til CSV: " + ex.Message);
-        //    }
-        //}
+        public async void SaveMoviesAsync()
+        {
+            try
+            {
+                // Asynkron gemme film til CSV for at undgå blockering af UI
+                await Task.Run(() => _movies);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fejl opstod under tilføjelse af film til CSV: " + ex.Message);
+            }
+        }
 
         // Indlæs film fra en CSV-fil
         public void LoadMoviesfromCSV()

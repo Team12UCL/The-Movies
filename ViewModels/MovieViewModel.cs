@@ -73,7 +73,7 @@ namespace The_Movies.ViewModels
             return SelectedMovie != null;
         }
 
-        private void RemoveMovie()
+        public void RemoveMovie()
         {
             if (SelectedMovie != null)
             {
@@ -102,7 +102,7 @@ namespace The_Movies.ViewModels
             return false;
         }
 
-        private void AddMovie()
+        public void AddMovie()
         {
             // Tjekker om filmen allerede er tilføjet
             if (_filmRepository.IsMovieAlreadyAdded(MovieToAdd.Title))
@@ -110,8 +110,6 @@ namespace The_Movies.ViewModels
                 MessageBox.Show("Filmen med titlen '" + MovieToAdd.Title + "' eksisterer allerede.");
                 return;
             }
-
-            // lav et int.TryParse() tjek på MovieToAdd.Duration.TotalMinutes?
 
             try
             {

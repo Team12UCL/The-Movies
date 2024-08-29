@@ -15,15 +15,11 @@ using The_Movies.ViewModels;
 
 namespace The_Movies
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         MovieViewModel movieViewModel;
         ForestillingViewModel forestillingViewModel;
         BookingViewModel bookingViewModel;
-        FilmRepository _filmRepository = new FilmRepository();
 
         public MainWindow()
         {

@@ -6,10 +6,10 @@ namespace The_Movies.Repositories
 {
     public class BookingRepository
     {
-        private static BookingRepository _instance;  // Singleton instance
-        private List<Booking> _bookings;  // Backing field for the list of bookings
+        private static BookingRepository _instance;  // Singleton instans
+        private List<Booking> _bookings;
 
-        // Public property to access the singleton instance
+        // For at sikre at der kun er ét instans af BookingRepository
         public static BookingRepository Instance
         {
             get
@@ -21,12 +21,11 @@ namespace The_Movies.Repositories
                 return _instance;
             }
         }
-
-        // Private constructor to prevent direct instantiation
         private BookingRepository()
         {
             _bookings = new List<Booking>();
 
+            // testdata: en booking
             _bookings.Add(new Booking
             {
                 CustomerEmail = "test@example.com",
@@ -35,13 +34,13 @@ namespace The_Movies.Repositories
             });
         }
 
-        // Method to add a new booking
+        // tilføj en booking
         public void AddBooking(Booking booking)
         {
             _bookings.Add(booking);
         }
 
-        // Method to get all bookings
+        // hent alle bookinger
         public List<Booking> GetAllBookings()
         {
             return _bookings;

@@ -122,7 +122,7 @@ namespace The_Movies.ViewModels
                 Movie = SelectedMovie
             };
 
-            // Tjek for overlapping forestilling
+            // Tjek for overlappende forestillinger
             if (_forestillingRepository.AreForestillingerOverlapping(newForestilling, forestillingStartTime, calculatedForestillingEndTime))
             {
                 MessageBox.Show("Fejl: Forestilling overlapper med en anden forestilling.");
@@ -132,13 +132,9 @@ namespace The_Movies.ViewModels
             _forestillingRepository.AddForestilling(newForestilling);
         }
 
-        private DateTime CalculateEndTimeWithCleaningAndCommercials(DateTime startTime, TimeSpan playTime)
+        public DateTime CalculateEndTimeWithCleaningAndCommercials(DateTime startTime, TimeSpan playTime)
         {
             TimeSpan cleaningAndCommercialsTime = new TimeSpan(0, 30, 0);
-
-            //TimeSpan cleaningTime = new TimeSpan(0, 15, 0);
-            //TimeSpan commercialsTime = new TimeSpan(0, 15, 0);
-            //TimeSpan timeToAdd = cleaningTime.Add(commercialsTime);
 
             // Tilføj filmens playtime til tid til rengøring og reklamer til starttidspunktet for at finde sluttidspunktet for forestillingen
             DateTime endTime = startTime.Add(playTime).Add(cleaningAndCommercialsTime);

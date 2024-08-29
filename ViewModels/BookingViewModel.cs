@@ -26,7 +26,7 @@ public class BookingViewModel : INotifyPropertyChanged
         {
             _selectedForestilling = value;
             OnPropertyChanged(nameof(SelectedForestilling));
-            // Update the number of seats whenever SelectedForestilling changes
+            // opdater antal sæder tilbage i biografsalen når en forestilling vælges (altså, ud fra den valgte biografsal)
             NumberOfSeats = _selectedForestilling.CinemaHall.Seats;
             Debug.WriteLine($"SelectedForestilling remaining seats: {_numberOfSeats}");
         }
@@ -58,7 +58,6 @@ public class BookingViewModel : INotifyPropertyChanged
 
     public BookingViewModel()
     {
-        // Initialize the repository via the singleton instance
         _forestillingRepository = ForestillingRepository.Instance;
         _bookingRepository = BookingRepository.Instance;
         Forestillinger = _forestillingRepository.GetAllForestillinger();
@@ -79,7 +78,8 @@ public class BookingViewModel : INotifyPropertyChanged
         return false;
     }
 
-    private void AddBooking()
+    // tilføj en booking ud fra input i UI
+    public void AddBooking()
     {
         Booking newBooking = new Booking
         {
@@ -91,7 +91,7 @@ public class BookingViewModel : INotifyPropertyChanged
 
         if (BookingToAdd.NumberOfTickets > NumberOfSeats)
         {
-            MessageBox.Show("Not enough seats available for booking");
+            MessageBox.Show("Ikke nok sæder tilgængelige til forestillingen");
             return;
         }
         else
