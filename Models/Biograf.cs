@@ -14,6 +14,7 @@ namespace The_Movies.Models
         public string Email { get; set; }
         // Hver biograf har en liste med biografsale
         public List<Biografsal> CinemaHalls { get; set; }
+        // Vi binder til en summary property for at kunne vise samlet biograf data i UI
         public string Summary => $"{CinemaName} ({Town})";
     }
 }

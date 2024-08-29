@@ -13,6 +13,7 @@ namespace The_Movies.Models
         public string Genre { get; set; }
         public string Director { get; set; }
         public DateTime PremiereDate { get; set; } = DateTime.Now;
+        // Vi binder til en summary property for at kunne vise samlet film data i UI
         public string Summary => $"{Title} ({Duration.TotalMinutes:N0}m, {Genre}) {PremiereDate:dd/mm/yy)}";
     }
 }

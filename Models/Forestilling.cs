@@ -10,6 +10,7 @@ namespace The_Movies.Models
     {
         public string Cinema { get; set; }
         public string Town { get; set; }
+        // Hver forestilling har en biografsal
         public Biografsal CinemaHall { get; set; }
         public DayOfWeek Day { get; set; }
         public DateTime StartTime { get; set; }
